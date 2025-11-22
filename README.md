@@ -121,7 +121,7 @@ export const galleryData = {
 עדכן את כתובת השרת ב-`src/components/ContactForm.jsx`:
 
 ```javascript
-const response = await fetch('http://localhost:5000/api/send', {
+const response = await fetch(`${import.meta.env.VITE_API_URL}/api/send`, {
   // שנה ל-URL של השרת שלך
 });
 ```
