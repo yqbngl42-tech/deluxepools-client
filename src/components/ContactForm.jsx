@@ -50,7 +50,7 @@ export const ContactForm = memo(() => {
     setErrors({});
 
     try {
-      const response = await fetch(`${import.meta.env.VITE_API_URL}/api/send`, {
+      const response = await fetch('https://luxepool-server.onrender.com/api/send', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(formData)
