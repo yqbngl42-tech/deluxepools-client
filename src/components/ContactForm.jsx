@@ -13,6 +13,7 @@ export const ContactForm = memo(() => {
     const [submitStatus, setSubmitStatus] = useState(null);
     const [errors, setErrors] = useState({});
 
+    // Client-side validation
     const validateForm = () => {
         const newErrors = {};
         
@@ -35,6 +36,7 @@ export const ContactForm = memo(() => {
     const handleSubmit = useCallback(async (e) => {
         e.preventDefault();
         
+        // Validate before submission
         if (!validateForm()) {
             setSubmitStatus('validation-error');
             return;
@@ -80,10 +82,7 @@ export const ContactForm = memo(() => {
 
     return (
         <form onSubmit={handleSubmit} className="space-y-4 sm:space-y-6" noValidate>
-
             <div className="grid sm:grid-cols-2 gap-4 sm:gap-6">
-
-                {/* שם מלא */}
                 <div>
                     <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-2">
                         שם מלא *
@@ -91,14 +90,14 @@ export const ContactForm = memo(() => {
                     <input 
                         id="name"
                         name="name"
-                        type="text"
+                        type="text" 
+                        placeholder="הכנס שם מלא" 
                         required 
                         value={formData.name} 
                         onChange={(e) => setFormData({ ...formData, name: e.target.value })} 
-                        className={`w-full px-4 sm:px-6 py-3 sm:py-4 rounded-xl border-2 
-                            ${errors.name ? 'border-red-500' : 'border-gray-200'} 
-                            focus:border-blue-500 focus:ring-4 focus:ring-blue-100 
-                            transition-all outline-none text-base`}
+                        className={`w-full px-4 sm:px-6 py-3 sm:py-4 rounded-xl border-2 ${errors.name ? 'border-red-500' : 'border-gray-200'} focus:border-blue-500 focus:ring-4 focus:ring-blue-100 transition-all outline-none text-base`}
+                        aria-label="שם מלא"
+                        aria-required="true"
                         aria-invalid={errors.name ? 'true' : 'false'}
                         aria-describedby={errors.name ? 'name-error' : undefined}
                         disabled={isSubmitting}
@@ -109,8 +108,6 @@ export const ContactForm = memo(() => {
                         </p>
                     )}
                 </div>
-
-                {/* טלפון */}
                 <div>
                     <label htmlFor="phone" className="block text-sm font-medium text-gray-700 mb-2">
                         טלפון *
@@ -118,14 +115,14 @@ export const ContactForm = memo(() => {
                     <input 
                         id="phone"
                         name="phone"
-                        type="tel"
+                        type="tel" 
+                        placeholder="050-1234567" 
                         required 
                         value={formData.phone} 
                         onChange={(e) => setFormData({ ...formData, phone: e.target.value })} 
-                        className={`w-full px-4 sm:px-6 py-3 sm:py-4 rounded-xl border-2 
-                            ${errors.phone ? 'border-red-500' : 'border-gray-200'} 
-                            focus:border-blue-500 focus:ring-4 focus:ring-blue-100 
-                            transition-all outline-none text-base`}
+                        className={`w-full px-4 sm:px-6 py-3 sm:py-4 rounded-xl border-2 ${errors.phone ? 'border-red-500' : 'border-gray-200'} focus:border-blue-500 focus:ring-4 focus:ring-blue-100 transition-all outline-none text-base`}
+                        aria-label="מספר טלפון"
+                        aria-required="true"
                         aria-invalid={errors.phone ? 'true' : 'false'}
                         aria-describedby={errors.phone ? 'phone-error' : undefined}
                         disabled={isSubmitting}
@@ -137,8 +134,6 @@ export const ContactForm = memo(() => {
                     )}
                 </div>
             </div>
-
-            {/* אימייל */}
             <div>
                 <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">
                     אימייל (אופציונלי)
@@ -146,13 +141,12 @@ export const ContactForm = memo(() => {
                 <input 
                     id="email"
                     name="email"
-                    type="email"
+                    type="email" 
+                    placeholder="example@gmail.com" 
                     value={formData.email} 
                     onChange={(e) => setFormData({ ...formData, email: e.target.value })} 
-                    className={`w-full px-4 sm:px-6 py-3 sm:py-4 rounded-xl border-2 
-                        ${errors.email ? 'border-red-500' : 'border-gray-200'} 
-                        focus:border-blue-500 focus:ring-4 focus:ring-blue-100 
-                        transition-all outline-none text-base`}
+                    className={`w-full px-4 sm:px-6 py-3 sm:py-4 rounded-xl border-2 ${errors.email ? 'border-red-500' : 'border-gray-200'} focus:border-blue-500 focus:ring-4 focus:ring-blue-100 transition-all outline-none text-base`}
+                    aria-label="כתובת אימייל"
                     aria-invalid={errors.email ? 'true' : 'false'}
                     aria-describedby={errors.email ? 'email-error' : undefined}
                     disabled={isSubmitting}
@@ -163,8 +157,6 @@ export const ContactForm = memo(() => {
                     </p>
                 )}
             </div>
-
-            {/* סוג שירות */}
             <div>
                 <label htmlFor="service" className="block text-sm font-medium text-gray-700 mb-2">
                     סוג שירות
@@ -174,9 +166,8 @@ export const ContactForm = memo(() => {
                     name="service"
                     value={formData.service} 
                     onChange={(e) => setFormData({ ...formData, service: e.target.value })} 
-                    className="w-full px-4 sm:px-6 py-3 sm:py-4 rounded-xl border-2 border-gray-200 
-                        focus:border-blue-500 focus:ring-4 focus:ring-blue-100 
-                        transition-all outline-none text-base"
+                    className="w-full px-4 sm:px-6 py-3 sm:py-4 rounded-xl border-2 border-gray-200 focus:border-blue-500 focus:ring-4 focus:ring-blue-100 transition-all outline-none text-base"
+                    aria-label="בחר סוג שירות"
                     disabled={isSubmitting}
                 >
                     <option value="">בחרו סוג שירות</option>
@@ -186,8 +177,6 @@ export const ContactForm = memo(() => {
                     <option value="שיפוצים">שיפוצים כללים</option>
                 </select>
             </div>
-
-            {/* הודעה — ללא placeholder */}
             <div>
                 <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-2">
                     הודעה (אופציונלי)
@@ -195,17 +184,16 @@ export const ContactForm = memo(() => {
                 <textarea 
                     id="message"
                     name="message"
-                    rows="4"
+                    placeholder="ספרו לנו על הפרויקט שלכם..." 
+                    rows="4" 
                     value={formData.message} 
                     onChange={(e) => setFormData({ ...formData, message: e.target.value })} 
-                    className="w-full px-4 sm:px-6 py-3 sm:py-4 rounded-xl border-2 border-gray-200 
-                        focus:border-blue-500 focus:ring-4 focus:ring-blue-100 
-                        transition-all outline-none text-base resize-none"
+                    className="w-full px-4 sm:px-6 py-3 sm:py-4 rounded-xl border-2 border-gray-200 focus:border-blue-500 focus:ring-4 focus:ring-blue-100 transition-all outline-none text-base resize-none"
+                    aria-label="הודעה נוספת"
                     disabled={isSubmitting}
                 />
             </div>
-
-            {/* הודעות מערכת */}
+            
             {submitStatus === 'validation-error' && (
                 <div className="bg-yellow-100 text-yellow-800 px-4 py-3 rounded-xl text-center" role="alert">
                     ⚠️ אנא תקן את השגיאות בטופס
@@ -223,21 +211,16 @@ export const ContactForm = memo(() => {
                     ❌ אירעה שגיאה. אנא נסו שוב או צרו קשר טלפונית.
                 </div>
             )}
-
-            {/* כפתור */}
+            
             <button 
                 type="submit" 
                 disabled={isSubmitting}
-                className={`w-full bg-gradient-to-r from-blue-600 to-cyan-500 text-white 
-                    px-6 sm:px-8 py-4 sm:py-5 rounded-xl text-base sm:text-xl font-bold shadow-lg 
-                    hover:shadow-xl hover:scale-105 transition-all duration-300 
-                    flex items-center justify-center gap-3 
-                    ${isSubmitting ? 'opacity-50 cursor-not-allowed' : ''}`}
+                className={`w-full bg-gradient-to-r from-blue-600 to-cyan-500 text-white px-6 sm:px-8 py-4 sm:py-5 rounded-xl text-base sm:text-xl font-bold shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-300 flex items-center justify-center gap-3 ${isSubmitting ? 'opacity-50 cursor-not-allowed' : ''}`}
+                aria-label="שלחו הודעה"
             >
                 <Send className="w-5 h-5 sm:w-6 sm:h-6" />
                 {isSubmitting ? 'שולח...' : 'שלחו הודעה'}
             </button>
-
         </form>
     );
 });
