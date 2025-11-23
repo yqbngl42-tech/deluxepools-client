@@ -4,7 +4,7 @@ Allow: /
 Disallow: /api/
 
 # Sitemap location
-Sitemap: https://www.deluxepools.co.il/sitemap.xml
+Sitemap: https://deluxepools.pro/sitemap.xml
 
 # Crawl-delay for better server performance
 Crawl-delay: 1
