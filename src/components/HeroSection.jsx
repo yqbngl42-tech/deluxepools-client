@@ -1,5 +1,6 @@
 import { memo, useState, useEffect } from 'react';
 import { Mail, ChevronRight } from './Icons';
+import { galleryData } from '../data/GalleryData';
 
 export const HeroSection = memo(() => {
     const [scrollY, setScrollY] = useState(0);
@@ -27,19 +28,25 @@ export const HeroSection = memo(() => {
     };
 
     return (
-        <header className="relative min-h-screen flex items-center overflow-hidden">
-            <div 
-                className="absolute inset-0 bg-cover bg-center" 
+    <header className="relative min-h-screen flex items-center overflow-hidden">
+        {/* תמונת רקע - טעינה מיידית! */}
+        <div className="absolute inset-0">
+            <img
+                src={galleryData.hero}
+                alt="בריכת שחייה יוקרתית"
+                className="w-full h-full object-cover"
                 style={{ 
                     transform: `translateY(${scrollY * 0.5}px)`,
-                    backgroundImage: 'url(/images/pools/pool1.webp)',
-                    backgroundSize: 'cover',
-                    backgroundPosition: 'center center'
                 }}
-            >
-                <div className="absolute inset-0 bg-black bg-opacity-40"></div>
-                <div className="absolute inset-0 bg-gradient-to-b from-cyan-900/20 via-transparent to-blue-900/30"></div>
-            </div>
+                loading="eager"
+                fetchpriority="high"
+                decoding="async"
+            />
+            <div className="absolute inset-0 bg-black bg-opacity-40"></div>
+            <div className="absolute inset-0 bg-gradient-to-b from-cyan-900/20 via-transparent to-blue-900/30"></div>
+        </div>
+        
+        {/* שאר התוכן... */}
 
             <div className="absolute top-1 sm:top-1.5 md:top-2 right-1 sm:right-1.5 md:right-2 z-20">
                 <div className="bg-white/95 backdrop-blur-md px-2.5 sm:px-3 md:px-4 py-1 sm:py-1.5 md:py-2 rounded-md sm:rounded-lg shadow-2xl border-2 border-cyan-500/30 transform hover:scale-105 transition-all duration-300">
